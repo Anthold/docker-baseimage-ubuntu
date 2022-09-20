@@ -1,0 +1,20 @@
+#!/usr/bin/with-contenv bash
+
+PUID=${PUID:-911}
+PGID=${PGID:-911}
+
+groupmod -o -g "$PGID" code
+usermod -o -u "$PUID" code
+
+echo '
+-------------------------------------
+GID/UID
+-------------------------------------'
+echo "
+User uid:    $(id -u code)
+User gid:    $(id -g code)
+-------------------------------------
+"
+chown code:code /app
+chown code:code /config
+chown code:code /defaults
